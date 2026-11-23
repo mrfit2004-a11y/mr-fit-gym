@@ -29,7 +29,7 @@ type FormState = {
 
 // Defined inline to avoid importing server-only modules (brand-settings.ts uses mongoose/db).
 const DEFAULT_BRAND: FormState = {
-  academyName: "Ahmed Emad",
+  academyName: "MR FIT",
   primaryColor: "#DC2626",
   secondaryColor: "#111827",
   buttonColor: "#DC2626",

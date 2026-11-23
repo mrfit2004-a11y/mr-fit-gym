@@ -1,4 +1,4 @@
-package com.ahmedemad.app;
+package com.mrfit.app;
 
 import com.getcapacitor.BridgeActivity;
 

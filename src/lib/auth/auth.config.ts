@@ -15,7 +15,7 @@ type AppToken = {
 const PROTECTED_PREFIXES = ["/admin", "/coach", "/client"];
 
 /** Appended to the WebView user agent by the Android app (mobile/capacitor.config.json). */
-const APP_USER_AGENT = "AhmedEmadApp/";
+const APP_USER_AGENT = "MrFitApp/";
 
 /**
  * Edge-safe auth config. Contains NO database or Node-only code so it can run

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BRAND } from "@/config/brand";
 
-/** "AHMED EMAD" wordmark: first word in the text color, second in brand red. */
+/** "MR FIT" wordmark: first word in the text color, second in brand red. */
 export function BrandText({ className }: { className?: string }) {
   return (
     <span dir="ltr" className={cn("font-extrabold tracking-tight", className)}>

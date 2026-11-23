@@ -22,10 +22,10 @@ self.addEventListener("push", (event) => {
   try {
     payload = event.data ? event.data.json() : {};
   } catch (_e) {
-    payload = { title: "Ahmed Emad" };
+    payload = { title: "MR FIT" };
   }
 
-  const title = payload.title || "Ahmed Emad";
+  const title = payload.title || "MR FIT";
   const notificationId = payload.data && payload.data.notificationId;
   const options = {
     body: payload.body || "",

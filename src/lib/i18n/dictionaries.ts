@@ -6,11 +6,11 @@ import type { Locale } from "@/lib/constants";
  */
 const ar = {
   brand: {
-    name: "أحمد عماد",
+    name: "MR FIT",
     tagline: "تدريب شخصي وأونلاين كوتشينج",
   },
   common: {
-    appName: "أحمد عماد",
+    appName: "MR FIT",
     loading: "جارٍ التحميل...",
     save: "حفظ",
     cancel: "إلغاء",
@@ -70,7 +70,7 @@ const ar = {
     startTrial: "اشترك الآن",
   },
   landing: {
-    heroTitle: "تدريب شخصي وأونلاين كوتشينج مع الكابتن أحمد عماد",
+    heroTitle: "تدريب شخصي وأونلاين كوتشينج مع الكابتن محمود رجب",
     heroSubtitle:
       "منصة متكاملة للمدربين الشخصيين لإدارة التدريب والتغذية والمتابعات والقياسات في مكان واحد.",
     ctaStart: "ابدأ التجربة المجانية",
@@ -94,10 +94,10 @@ const ar = {
       messagingDesc: "تواصل مباشر مع عملائك عبر محادثة خاصة وآمنة.",
     },
     ctaSectionTitle: "جاهز لتطوير عملك التدريبي؟",
-    ctaSectionSubtitle: "ابدأ اشتراكك النهارده مع الكابتن أحمد عماد.",
+    ctaSectionSubtitle: "ابدأ اشتراكك النهارده مع الكابتن محمود رجب.",
   },
   footer: {
-    rights: "© أحمد عماد. جميع الحقوق محفوظة.",
+    rights: "© MR FIT. جميع الحقوق محفوظة.",
     product: "المنتج",
     company: "الشركة",
     legal: "قانوني",
@@ -309,11 +309,11 @@ export type Dictionary = typeof ar;
 
 const en: Dictionary = {
   brand: {
-    name: "Ahmed Emad",
+    name: "MR FIT",
     tagline: "Personal Training & Online Coaching",
   },
   common: {
-    appName: "Ahmed Emad",
+    appName: "MR FIT",
     loading: "Loading...",
     save: "Save",
     cancel: "Cancel",
@@ -373,7 +373,7 @@ const en: Dictionary = {
     startTrial: "Subscribe now",
   },
   landing: {
-    heroTitle: "Personal training and online coaching with Coach Ahmed Emad",
+    heroTitle: "Personal training and online coaching with Coach Mahmoud Ragab",
     heroSubtitle:
       "An all-in-one platform for personal trainers to manage training, nutrition, check-ins and measurements in one place.",
     ctaStart: "Start free trial",
@@ -397,10 +397,10 @@ const en: Dictionary = {
       messagingDesc: "Communicate directly with your clients through private, secure chat.",
     },
     ctaSectionTitle: "Ready to grow your coaching business?",
-    ctaSectionSubtitle: "Start your coaching with Ahmed Emad today.",
+    ctaSectionSubtitle: "Start your coaching with Coach Mahmoud Ragab today.",
   },
   footer: {
-    rights: "© Ahmed Emad. All Rights Reserved.",
+    rights: "© MR FIT. All Rights Reserved.",
     product: "Product",
     company: "Company",
     legal: "Legal",

@@ -1,6 +1,6 @@
-# Ahmed Emad — Personal Training
+# MR FIT — Personal Training
 
-Single-trainer site for Coach Ahmed Emad: a public landing page, client
+Single-trainer site for Coach Mahmoud Ragab: a public landing page, client
 self sign-up with coaching packages, and the coaching app (training programs,
 nutrition plans, check-ins, progress and messaging). The one coach account is
 created by the super admin.

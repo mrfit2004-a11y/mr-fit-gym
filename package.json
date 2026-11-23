@@ -1,8 +1,8 @@
 {
-  "name": "ahmed-emad",
+  "name": "mr-fit",
   "version": "0.1.0",
   "private": true,
-  "description": "Ahmed Emad — personal training and online coaching site.",
+  "description": "MR FIT — personal training and online coaching site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

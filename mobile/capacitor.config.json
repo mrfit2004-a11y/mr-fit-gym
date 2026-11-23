@@ -1,6 +1,6 @@
 {
-  "appId": "com.ahmedemad.app",
-  "appName": "Ahmed Emad",
+  "appId": "com.mrfit.app",
+  "appName": "MR FIT",
   "webDir": "www",
   "server": {
     "url": "https://ahmed-emad-one.vercel.app/login",
@@ -8,7 +8,7 @@
     "errorPath": "offline.html"
   },
   "android": {
-    "appendUserAgent": "AhmedEmadApp/1.0",
+    "appendUserAgent": "MrFitApp/1.0",
     "backgroundColor": "#050505",
     "allowMixedContent": false
   },

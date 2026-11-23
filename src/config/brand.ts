@@ -7,17 +7,17 @@
  */
 export const BRAND = {
   /** Latin wordmark, split so the second word can take the accent color. */
-  name: "Ahmed Emad",
-  wordmark: { first: "AHMED", second: "EMAD" },
-  nameAr: "أحمد عماد",
+  name: "MR FIT",
+  wordmark: { first: "MR", second: "FIT" },
+  nameAr: "إم آر فيت",
 
   tagline: {
     ar: "تدريب شخصي وأونلاين كوتشينج",
     en: "Personal Training & Online Coaching",
   },
   description: {
-    ar: "تدريب شخصي وأونلاين كوتشينج مع الكابتن أحمد عماد — برنامج تمارين ونظام غذائي مخصص لك ومتابعة مستمرة لحد ما توصل لهدفك.",
-    en: "Personal training and online coaching with Coach Ahmed Emad — a workout program and nutrition plan built for you, with ongoing follow-up until you reach your goal.",
+    ar: "تدريب شخصي وأونلاين كوتشينج مع الكابتن محمود رجب — برنامج تمارين ونظام غذائي مخصص لك ومتابعة مستمرة لحد ما توصل لهدفك.",
+    en: "Personal training and online coaching with Coach Mahmoud Ragab — a workout program and nutrition plan built for you, with ongoing follow-up until you reach your goal.",
   },
 
   images: {

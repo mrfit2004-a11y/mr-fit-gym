@@ -91,7 +91,7 @@ const overlay = Buffer.from(`
     </linearGradient>
   </defs>
   <rect x="0" y="0" width="630" height="630" fill="url(#g)"/>
-  <text x="650" y="300" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" letter-spacing="-2">AHMED <tspan fill="${RED}">EMAD</tspan></text>
+  <text x="650" y="300" font-family="'Segoe UI', Arial, sans-serif" font-weight="800" font-size="72" fill="#FFFFFF" letter-spacing="-2">MR <tspan fill="${RED}">FIT</tspan></text>
   <text x="653" y="352" font-family="'Segoe UI', Arial, sans-serif" font-weight="500" font-size="28" fill="#A1A1A6">Personal Training · Online Coaching</text>
 </svg>`);
 await sharp({ create: { width: 1200, height: 630, channels: 3, background: BLACK } })

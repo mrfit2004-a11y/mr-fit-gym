@@ -19,7 +19,7 @@ export interface BrandContextValue {
 
 /** Site defaults — used when no BrandProvider is present (e.g. super admin). */
 const SITE_BRAND_DEFAULTS: BrandContextValue = {
-  academyName: "Ahmed Emad",
+  academyName: "MR FIT",
   logo: undefined,
   primaryColor: "#DC2626",
   secondaryColor: "#111827",

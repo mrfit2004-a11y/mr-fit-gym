@@ -7,7 +7,7 @@ export type BrandSettings = NonNullable<
 
 /** Site default branding — used whenever a coach has no custom brand config. */
 export const DEFAULT_BRAND: BrandSettings = {
-  academyName: "Ahmed Emad",
+  academyName: "MR FIT",
   logo: undefined,
   primaryColor: "#DC2626",
   secondaryColor: "#111827",

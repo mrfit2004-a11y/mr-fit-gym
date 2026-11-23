@@ -181,7 +181,7 @@ const MediaSchema = new Schema<IMedia>(
 
 const BrandSettingsSchema = new Schema<NonNullable<ICoachProfile["brandSettings"]>>(
   {
-    academyName: { type: String, trim: true, default: "Ahmed Emad" },
+    academyName: { type: String, trim: true, default: "MR FIT" },
     logo: { type: String, default: null },
     primaryColor: { type: String, default: "#DC2626" },
     secondaryColor: { type: String, default: "#111827" },

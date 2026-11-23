@@ -32,7 +32,7 @@ export interface ISettings {
 const SettingsSchema = new Schema<ISettings>(
   {
     key: { type: String, default: "global", unique: true },
-    platformName: { type: String, default: "Ahmed Emad" },
+    platformName: { type: String, default: "MR FIT" },
     domain: { type: String, default: "" },
     adminWhatsapp: { type: String, default: "201000000000" },
     supportEmail: { type: String, default: "" },

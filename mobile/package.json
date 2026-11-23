@@ -1,7 +1,7 @@
 {
-  "name": "ahmed-emad-mobile",
+  "name": "mr-fit-mobile",
   "private": true,
-  "description": "Android shell for the Ahmed Emad coaching app. Loads the live site and opens on the login screen.",
+  "description": "Android shell for the MR FIT coaching app. Loads the live site and opens on the login screen.",
   "scripts": {
     "sync": "cap sync android",
     "open": "cap open android",
