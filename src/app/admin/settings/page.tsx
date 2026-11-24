@@ -25,7 +25,7 @@ export default function AdminSettingsPage() {
           </CardHeader>
           <CardContent className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2"><Label>{L("اسم المنصة", "Platform name")}</Label><Input defaultValue="MR FIT" /></div>
-            <div className="space-y-2"><Label>{L("الدومين", "Domain")}</Label><Input dir="ltr" defaultValue="mr-fit-gym-psi.vercel.app" /></div>
+            <div className="space-y-2"><Label>{L("الدومين", "Domain")}</Label><Input dir="ltr" defaultValue="mr.fitxnet.com" /></div>
             <div className="space-y-2 sm:col-span-2"><Label>{L("بريد الدعم", "Support email")}</Label><Input dir="ltr" defaultValue="" /></div>
           </CardContent>
         </Card>
