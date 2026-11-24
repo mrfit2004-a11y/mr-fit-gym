@@ -21,8 +21,8 @@ export const HERO: {
   badge: L;
 } = {
   eyebrow: { ar: "تدريب أونلاين احترافي", en: "Online Coaching" },
-  titleLine1: { ar: "أنا جاهز،", en: "I'm ready." },
-  titleLine2: { ar: "إنت جاهز؟", en: "Are you ready?" },
+  titleLine1: { ar: "مفيش أعذار،", en: "No excuses." },
+  titleLine2: { ar: "فيه نتايج!", en: "Just results!" },
   subtitle: {
     ar: "برنامج تمارين وتغذية مفصّل على مقاسك، مع متابعة حقيقية خطوة بخطوة حتى توصل لهدفك.",
     en: "A training and nutrition plan built around you, with real step-by-step follow-up until you reach your goal.",
