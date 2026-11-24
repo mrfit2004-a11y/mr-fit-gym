@@ -1,7 +1,7 @@
 /**
  * Builds every brand image from the two source files in the project root:
  *   - ahmedlogo.png  → trainer portrait (hero banner, login panel, share image)
- *   - logo1.png      → round logo badge (app icons, favicon, header logo)
+ *   - mrfit-logo.jpg → round logo badge (app icons, favicon, header logo)
  *
  * Re-run after replacing either source:
  *
@@ -13,7 +13,7 @@ import { resolve, sep } from "node:path";
 
 const root = process.cwd();
 const photoSrc = resolve(root, "ahmedlogo.png");
-const logoSrc = resolve(root, "logo1.png");
+const logoSrc = resolve(root, "mrfit-logo.jpg");
 const brandDir = resolve(root, "public/brand");
 await mkdir(brandDir, { recursive: true });
 
