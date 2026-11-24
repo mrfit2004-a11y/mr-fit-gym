@@ -42,7 +42,7 @@ export const BRAND = {
   /** Full profile URLs. Empty entries are hidden in the UI. */
   social: {
     instagram: "https://www.instagram.com/mahmoud_r_fit",
-    facebook: "https://www.facebook.com/share/1FY82QNEr6/",
+    facebook: "https://www.facebook.com/profile.php?id=61585059486921",
     tiktok: "",
     youtube: "",
   },
