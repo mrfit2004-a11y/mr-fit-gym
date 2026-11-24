@@ -31,6 +31,7 @@ import {
   TESTIMONIALS,
 } from "@/config/site-content";
 import { cn, formatNumber } from "@/lib/utils";
+import { AnimatedHeadline, CountUp, ParallaxFrame, PulseGlow } from "@/components/marketing/hero-motion";
 import type { PackageDTO } from "@/lib/services/coaching-packages";
 
 const SERVICE_ICONS = [PlayCircle, Salad, MessagesSquare];
@@ -59,13 +60,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                 {tr(HERO.eyebrow)}
               </span>
             </Reveal>
-            <Reveal delay={0.06}>
-              <h1 className="text-display mt-6">
-                {tr(HERO.titleLine1)}
-                <br />
-                <span className="text-primary">{tr(HERO.titleLine2)}</span>
-              </h1>
-            </Reveal>
+            <AnimatedHeadline className="text-display mt-6" line1={tr(HERO.titleLine1)} line2={tr(HERO.titleLine2)} />
             <Reveal delay={0.12}>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">
                 {tr(HERO.subtitle)}
@@ -73,8 +68,9 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
-                <Button asChild size="lg" className="w-full sm:w-auto">
+                <Button asChild size="lg" className="group relative w-full overflow-hidden shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.7)] sm:w-auto">
                   <Link href="/register">
+                    <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 animate-shine bg-gradient-to-r from-transparent via-white/35 to-transparent" aria-hidden />
                     {tr(HERO.ctaPrimary)}
                     <Arrow className="h-4 w-4" />
                   </Link>
@@ -89,7 +85,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                 {STATS.map((s) => (
                   <div key={s.value} className="text-center lg:text-start">
                     <dt className="sr-only">{tr(s.label)}</dt>
-                    <dd className="text-3xl font-bold tabular-nums" dir="ltr">{s.value}</dd>
+                    <dd className="text-3xl font-bold tabular-nums" dir="ltr"><CountUp value={s.value} /></dd>
                     <dd className="mt-1 text-sm text-muted-foreground">{tr(s.label)}</dd>
                   </div>
                 ))}
@@ -98,19 +94,18 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
           </div>
 
           <Reveal delay={0.1} y={40} className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div
-              className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_40%,hsl(var(--primary)/0.35),transparent_70%)] blur-2xl"
-              aria-hidden
-            />
+            <PulseGlow className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_40%,hsl(var(--primary)/0.4),transparent_70%)] blur-2xl" />
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-border/60 bg-card shadow-elevated">
-              <Image
-                src={BRAND.images.portrait}
-                alt={coachName}
-                fill
-                priority
-                sizes="(min-width: 1024px) 45vw, (min-width: 640px) 448px, 92vw"
-                className="object-cover object-top"
-              />
+              <ParallaxFrame className="absolute inset-0">
+                <Image
+                  src={BRAND.images.portrait}
+                  alt={coachName}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, (min-width: 640px) 448px, 92vw"
+                  className="object-cover object-top"
+                />
+              </ParallaxFrame>
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
               <div className="absolute inset-x-4 bottom-4 flex items-center gap-3 rounded-2xl border border-white/15 bg-black/45 p-3 text-white backdrop-blur-xl">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
@@ -202,7 +197,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
               <div className="mt-10 grid grid-cols-3 gap-3">
                 {STATS.map((s) => (
                   <div key={s.value} className="rounded-2xl border border-border/60 bg-background p-4 text-center">
-                    <div className="text-2xl font-bold tabular-nums sm:text-3xl" dir="ltr">{s.value}</div>
+                    <div className="text-2xl font-bold tabular-nums sm:text-3xl" dir="ltr"><CountUp value={s.value} /></div>
                     <div className="mt-1 text-sm text-muted-foreground">{tr(s.label)}</div>
                   </div>
                 ))}

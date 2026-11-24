@@ -117,6 +117,10 @@ const config: Config = {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(300%)" },
         },
+        shine: {
+          "0%, 60%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(400%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -125,6 +129,7 @@ const config: Config = {
         "scale-in": "scale-in 0.35s var(--ease-out) both",
         marquee: "marquee 40s linear infinite",
         "loading-bar": "loading-bar 1.1s ease-in-out infinite",
+        shine: "shine 3.5s ease-in-out infinite",
       },
     },
   },
