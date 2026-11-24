@@ -16,7 +16,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * Hero headline that rises in word by word. Words (not letters) are animated
- * so Arabic keeps its joined letterforms.
+ * so Arabic keeps its joined letterforms. Pure CSS, so it plays from the
+ * server-rendered HTML without waiting for JavaScript (keeps LCP fast).
  */
 export function AnimatedHeadline({ line1, line2, className }: { line1: string; line2: string; className?: string }) {
   const words = (text: string) => text.split(" ").filter(Boolean);
@@ -25,14 +26,12 @@ export function AnimatedHeadline({ line1, line2, className }: { line1: string; l
 
   const word = (w: string, i: number, accent = false) => (
     <span key={`${w}-${i}`} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
-      <motion.span
-        className={cn("inline-block", accent && "text-primary")}
-        initial={{ y: "110%", opacity: 0, filter: "blur(8px)" }}
-        animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.9, delay: 0.15 + i * 0.12, ease: EASE_OUT }}
+      <span
+        className={cn("inline-block animate-word-rise", accent && "text-primary")}
+        style={{ animationDelay: `${100 + i * 110}ms` }}
       >
         {w}
-      </motion.span>
+      </span>
       {" "}
     </span>
   );

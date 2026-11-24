@@ -117,6 +117,10 @@ const config: Config = {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(300%)" },
         },
+        "word-rise": {
+          from: { opacity: "0", transform: "translateY(110%)", filter: "blur(8px)" },
+          to: { opacity: "1", transform: "translateY(0)", filter: "blur(0)" },
+        },
         shine: {
           "0%, 60%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(400%)" },
@@ -130,6 +134,7 @@ const config: Config = {
         marquee: "marquee 40s linear infinite",
         "loading-bar": "loading-bar 1.1s ease-in-out infinite",
         shine: "shine 3.5s ease-in-out infinite",
+        "word-rise": "word-rise 0.9s var(--ease-out) both",
       },
     },
   },

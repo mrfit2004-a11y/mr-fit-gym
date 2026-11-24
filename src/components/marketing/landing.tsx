@@ -57,19 +57,19 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
         />
         <div className="container grid items-center gap-10 pb-16 pt-10 md:pb-24 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="text-center lg:text-start">
-            <Reveal>
+            <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-4 py-1.5 text-sm font-medium backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-primary" />
                 {tr(HERO.eyebrow)}
               </span>
-            </Reveal>
+            </div>
             <AnimatedHeadline className="text-display mt-6" line1={tr(HERO.titleLine1)} line2={tr(HERO.titleLine2)} />
-            <Reveal delay={0.12}>
+            <div className="animate-fade-in" style={{ animationDelay: "450ms" }}>
               <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">
                 {tr(HERO.subtitle)}
               </p>
-            </Reveal>
-            <Reveal delay={0.18}>
+            </div>
+            <div className="animate-fade-in" style={{ animationDelay: "600ms" }}>
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
                 <Button asChild size="lg" className="group relative w-full overflow-hidden shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.7)] sm:w-auto">
                   <Link href="/register">
@@ -82,8 +82,8 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                   <Link href="/login">{tr(HERO.ctaSecondary)}</Link>
                 </Button>
               </div>
-            </Reveal>
-            <Reveal delay={0.24}>
+            </div>
+            <div className="animate-fade-in" style={{ animationDelay: "750ms" }}>
               <dl className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 lg:mx-0">
                 {STATS.map((s) => (
                   <div key={s.value} className="text-center lg:text-start">
@@ -93,10 +93,10 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                   </div>
                 ))}
               </dl>
-            </Reveal>
+            </div>
           </div>
 
-          <Reveal delay={0.1} y={40} className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-md animate-scale-in lg:max-w-none" style={{ animationDelay: "200ms", animationDuration: "900ms" }}>
             <PulseGlow className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_40%,hsl(var(--primary)/0.4),transparent_70%)] blur-2xl" />
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-border/60 bg-card shadow-elevated">
               <ParallaxFrame className="absolute inset-0">
@@ -120,7 +120,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                 </span>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
 
         {/* Pillars marquee — always LTR so the loop direction is stable */}
