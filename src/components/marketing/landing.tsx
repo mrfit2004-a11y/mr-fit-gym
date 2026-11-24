@@ -186,7 +186,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
               <p className="text-eyebrow">{L("مين الكابتن", "Your coach")}</p>
               <h2 className="text-headline mt-3">{coachName}</h2>
             </Reveal>
-            <ul className="mt-8 space-y-4">
+            <ul className={cn("space-y-4", CREDENTIALS.length > 0 && "mt-8")}>
               {CREDENTIALS.map((c, i) => (
                 <Reveal key={i} delay={i * 0.05}>
                   <li className="flex items-start gap-3">

@@ -58,16 +58,7 @@ export const SERVICES: { title: L; desc: L }[] = [
   },
 ];
 
-export const CREDENTIALS: L[] = [
-  { ar: "مدرب شخصي معتمد من منظمة EREPS لعلوم الرياضة", en: "Personal trainer certified by EREPS for sports science" },
-  { ar: "مُعِدّ بدني ومخطّط أحمال معتمد من ACE", en: "Strength & conditioning coach and load planner certified by ACE" },
-  {
-    ar: "المُعِدّ البدني لفريق السباحة بنادي وادي دجلة أسيوط",
-    en: "Strength & conditioning coach for the swimming team at Wadi Degla Club, Assiut",
-  },
-  { ar: "أخصائي تدريب وظيفي", en: "Functional training specialist" },
-  { ar: "محاضر مدربين بمعهد INSEP Pro", en: "Trainer lecturer at INSEP Pro institute" },
-];
+export const CREDENTIALS: L[] = [];
 
 export const STATS: { value: string; label: L }[] = [
   { value: "500+", label: { ar: "متدرب", en: "Clients" } },
