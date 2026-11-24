@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Logo } from "@/components/brand/logo";
 import { LanguageSwitcher } from "@/components/brand/language-switcher";
 import { ThemeToggle } from "@/components/brand/theme-toggle";
@@ -15,12 +16,40 @@ export function SiteHeader() {
   const L = (ar: string, en: string) => (locale === "ar" ? ar : en);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
 
+  // Glass background once scrolled; hide while scrolling down, reveal on scroll up.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      if (Math.abs(y - last) > 6) {
+        setHidden(y > last && y > 400);
+        last = y;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Highlight the nav link of the section currently in view.
+  useEffect(() => {
+    const sections = ["services", "about", "results", "pricing", "faq"]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(`#${e.target.id}`);
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
   }, []);
 
   const navLinks = [
@@ -34,10 +63,16 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-[box-shadow,background-color] duration-300",
+        "sticky top-0 z-40 w-full transition-[box-shadow,background-color,transform] duration-300 ease-out",
         scrolled || open ? "glass hairline-b" : "bg-transparent",
+        hidden && !open && "-translate-y-full",
       )}
     >
+      <motion.div
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-primary rtl:origin-right"
+        style={{ scaleX: progress, opacity: scrolled ? 1 : 0 }}
+        aria-hidden
+      />
       <div className="container flex h-16 items-center justify-between gap-4">
         <div className="flex items-center gap-8">
           <Logo />
@@ -46,9 +81,20 @@ export function SiteHeader() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                aria-current={active === link.href ? "true" : undefined}
+                className={cn(
+                  "relative text-sm font-medium transition-colors hover:text-foreground",
+                  active === link.href ? "text-foreground" : "text-muted-foreground",
+                )}
               >
                 {link.label}
+                {active === link.href && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute -bottom-1.5 inset-x-0 h-0.5 rounded-full bg-primary"
+                    transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                  />
+                )}
               </a>
             ))}
           </nav>

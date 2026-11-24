@@ -31,7 +31,7 @@ import {
   TESTIMONIALS,
 } from "@/config/site-content";
 import { cn, formatNumber } from "@/lib/utils";
-import { AnimatedHeadline, CountUp, ParallaxFrame, PulseGlow } from "@/components/marketing/hero-motion";
+import { AnimatedHeadline, CountUp, FloatingWhatsApp, ParallaxFrame, PulseGlow } from "@/components/marketing/hero-motion";
 import { ResultsRail } from "@/components/marketing/results-rail";
 import { motion } from "framer-motion";
 import { EASE_OUT } from "@/components/ui/reveal";
@@ -404,15 +404,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
       </section>
 
       {/* Floating WhatsApp */}
-      <a
-        href={wa}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={L("تواصل على واتساب", "Chat on WhatsApp")}
-        className="press fixed bottom-5 end-5 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-elevated transition-transform hover:scale-105"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </a>
+      <FloatingWhatsApp href={wa} label={L("اتكلم مع الكابتن", "Talk to the coach")} />
     </main>
   );
 }

@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { MessageCircle } from "lucide-react";
 import {
+  AnimatePresence,
   animate,
   motion,
   useInView,
@@ -92,6 +94,47 @@ export function ParallaxFrame({ children, className }: { children: React.ReactNo
         {children}
       </motion.div>
     </div>
+  );
+}
+
+/**
+ * WhatsApp button that pops in once the visitor scrolls past the hero, with a
+ * pulsing ring and a label that slides out on larger screens.
+ */
+export function FloatingWhatsApp({ href, label }: { href: string; label: string }) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className="group fixed bottom-5 end-5 z-30 flex items-center gap-3"
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          transition={{ type: "spring", stiffness: 380, damping: 22 }}
+        >
+          <span className="hidden rounded-full bg-card px-4 py-2 text-sm font-semibold shadow-elevated ring-1 ring-border/60 transition-transform duration-300 group-hover:-translate-y-0.5 md:block">
+            {label}
+          </span>
+          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-elevated transition-transform duration-300 group-hover:scale-110">
+            <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-40 [animation-duration:2.2s]" aria-hidden />
+            <MessageCircle className="relative h-6 w-6" />
+          </span>
+        </motion.a>
+      )}
+    </AnimatePresence>
   );
 }
 
