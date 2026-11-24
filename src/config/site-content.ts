@@ -163,8 +163,8 @@ export const FAQ: { q: L; a: L }[] = [
   {
     q: { ar: "إزاي بدفع؟", en: "How do I pay?" },
     a: {
-      ar: "الدفع عن طريق إنستا باي على الرقم 01010082746، وبعد ما الكابتن يأكد الدفع هيتواصل معاك على واتساب لتفعيل اشتراكك.",
-      en: "Pay by InstaPay to 01010082746. Once the coach confirms the payment, he contacts you on WhatsApp to activate your subscription.",
+      ar: "الدفع عن طريق إنستا باي على الرقم 01014509058، وبعد ما الكابتن يأكد الدفع هيتواصل معاك على واتساب لتفعيل اشتراكك.",
+      en: "Pay by InstaPay to 01014509058. Once the coach confirms the payment, he contacts you on WhatsApp to activate your subscription.",
     },
   },
   {
@@ -185,10 +185,10 @@ export const FAQ: { q: L; a: L }[] = [
 
 export const CONTACT = {
   /** Local display format. */
-  phone: "01010082746",
+  phone: "01014509058",
   /** International format, digits only — for wa.me links. */
-  whatsapp: "201010082746",
-  instapay: "01010082746",
+  whatsapp: "201014509058",
+  instapay: "01014509058",
   whatsappGreeting: {
     ar: "مرحبا كابتن، حابب أستفسر عن الاشتراك",
     en: "Hi coach, I'd like to ask about subscribing",

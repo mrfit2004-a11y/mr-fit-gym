@@ -37,12 +37,12 @@ export const BRAND = {
   },
 
   /** International format, digits only. Empty until the real number is provided. */
-  whatsapp: process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || "201010082746",
+  whatsapp: process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || "201014509058",
 
   /** Full profile URLs. Empty entries are hidden in the UI. */
   social: {
-    instagram: "",
-    facebook: "",
+    instagram: "https://www.instagram.com/mahmoud_r_fit",
+    facebook: "https://www.facebook.com/share/1FY82QNEr6/",
     tiktok: "",
     youtube: "",
   },
