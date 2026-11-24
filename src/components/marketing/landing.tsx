@@ -41,7 +41,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
   const tr = (v: { ar: string; en: string }) => v[locale] || v.ar;
   const Arrow = dir === "rtl" ? ArrowLeft : ArrowRight;
   const wa = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(CONTACT.whatsappGreeting[locale])}`;
-  const coachName = locale === "ar" ? `كابتن ${BRAND.nameAr}` : `Coach ${BRAND.name}`;
+  const coachName = locale === "ar" ? `كابتن ${BRAND.coach.ar}` : `Coach ${BRAND.coach.en}`;
 
   return (
     <main className="overflow-x-clip">

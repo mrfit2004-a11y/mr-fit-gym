@@ -9,7 +9,10 @@ export const BRAND = {
   /** Latin wordmark, split so the second word can take the accent color. */
   name: "MR FIT",
   wordmark: { first: "MR", second: "FIT" },
-  nameAr: "إم آر فيت",
+  nameAr: "MR FIT",
+
+  /** The trainer behind the app — shown wherever a person is meant, not the brand. */
+  coach: { ar: "محمود رجب", en: "Mahmoud Ragab" },
 
   tagline: {
     ar: "تدريب شخصي وأونلاين كوتشينج",
