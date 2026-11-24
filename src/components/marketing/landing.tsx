@@ -32,6 +32,9 @@ import {
 } from "@/config/site-content";
 import { cn, formatNumber } from "@/lib/utils";
 import { AnimatedHeadline, CountUp, ParallaxFrame, PulseGlow } from "@/components/marketing/hero-motion";
+import { ResultsRail } from "@/components/marketing/results-rail";
+import { motion } from "framer-motion";
+import { EASE_OUT } from "@/components/ui/reveal";
 import type { PackageDTO } from "@/lib/services/coaching-packages";
 
 const SERVICE_ICONS = [PlayCircle, Salad, MessagesSquare];
@@ -141,18 +144,20 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
             {SERVICES.map((s, i) => {
               const Icon = SERVICE_ICONS[i] ?? PlayCircle;
               return (
-                <Reveal key={i} delay={i * 0.08}>
-                  <article className="lift h-full rounded-3xl border border-border/60 bg-card p-7 shadow-soft">
-                    <div className="flex items-center justify-between">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Reveal key={i} delay={i * 0.12} y={40}>
+                  <article className="lift group relative h-full overflow-hidden rounded-3xl border border-border/60 bg-card p-7 shadow-soft transition-colors duration-300 hover:border-primary/50">
+                    <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-primary transition-transform duration-500 ease-out group-hover:scale-x-100 rtl:origin-right" aria-hidden />
+                    <span className="pointer-events-none absolute -end-16 -top-16 h-40 w-40 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
+                    <div className="relative flex items-center justify-between">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
                         <Icon className="h-6 w-6" />
                       </span>
-                      <span className="text-4xl font-bold text-muted-foreground/25 tabular-nums" dir="ltr">
+                      <span className="text-4xl font-bold text-muted-foreground/25 tabular-nums transition-colors duration-500 group-hover:text-primary/40" dir="ltr">
                         0{i + 1}
                       </span>
                     </div>
-                    <h3 className="mt-6 text-xl font-semibold">{tr(s.title)}</h3>
-                    <p className="mt-2 leading-relaxed text-muted-foreground">{tr(s.desc)}</p>
+                    <h3 className="relative mt-6 text-xl font-semibold">{tr(s.title)}</h3>
+                    <p className="relative mt-2 leading-relaxed text-muted-foreground">{tr(s.desc)}</p>
                   </article>
                 </Reveal>
               );
@@ -164,15 +169,23 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
       {/* ───────── About the coach ───────── */}
       <section id="about" className="scroll-mt-20 bg-card/50 py-20 md:py-28">
         <div className="container grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal className="mx-auto w-full max-w-md">
-            <div className="relative aspect-square overflow-hidden rounded-full bg-black shadow-elevated">
-              <Image
-                src={BRAND.images.logoLarge}
-                alt={coachName}
-                fill
-                sizes="(min-width: 1024px) 28rem, 92vw"
-                className="object-cover"
+          <Reveal className="mx-auto w-full max-w-md" y={40}>
+            <div className="group relative aspect-square">
+              {/* Rotating brand ring + soft glow around the badge */}
+              <div className="absolute -inset-3 rounded-full bg-[radial-gradient(closest-side,hsl(var(--primary)/0.35),transparent)] blur-2xl" aria-hidden />
+              <div
+                className="absolute -inset-1.5 animate-[spin_14s_linear_infinite] rounded-full bg-[conic-gradient(from_0deg,hsl(var(--primary)),transparent_30%,transparent_55%,hsl(var(--primary))_75%,transparent)]"
+                aria-hidden
               />
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-black shadow-elevated">
+                <Image
+                  src={BRAND.images.logoLarge}
+                  alt={coachName}
+                  fill
+                  sizes="(min-width: 1024px) 28rem, 92vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
             </div>
           </Reveal>
 
@@ -216,7 +229,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
             subtitle={L("نتائج فعلية في خلال شهور — بالالتزام والمتابعة الصح.", "Real change in months — with the right commitment and follow-up.")}
           />
         </div>
-        <PhotoRail images={GALLERY.transformations} alt={L("نتيجة عميل", "Client result")} hint={L("اسحب لمشاهدة المزيد", "Swipe to see more")} />
+        <ResultsRail images={GALLERY.transformations} alt={L("نتيجة عميل", "Client result")} hint={L("اسحب لمشاهدة المزيد", "Swipe to see more")} />
       </section>
 
       {/* ───────── Pricing ───────── */}
@@ -230,15 +243,17 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                   ? Math.round((1 - p.price / p.originalPrice) * 100)
                   : null;
               return (
-                <Reveal key={p.id || i} delay={(i % 3) * 0.07}>
+                <Reveal key={p.id || i} delay={(i % 3) * 0.1} y={40} className={cn(p.popular && "lg:-my-3")}>
                   <article
                     className={cn(
                       "lift relative flex h-full flex-col rounded-3xl border bg-card p-7 shadow-soft",
-                      p.popular ? "border-primary ring-4 ring-primary/10" : "border-border/60",
+                      p.popular
+                        ? "border-primary bg-gradient-to-b from-primary/[0.08] to-card shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.55)] ring-4 ring-primary/10 lg:py-10"
+                        : "border-border/60 transition-colors duration-300 hover:border-primary/40",
                     )}
                   >
                     {p.popular && (
-                      <span className="absolute -top-3 start-7 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                      <span className="absolute -top-3 start-7 inline-flex animate-pulse items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-[0_6px_20px_-6px_hsl(var(--primary))] [animation-duration:2.5s]">
                         <Star className="h-3 w-3 fill-current" />
                         {L("الأكثر اختياراً", "Most chosen")}
                       </span>
@@ -252,7 +267,17 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
                     </div>
                     {discount != null && p.originalPrice && (
                       <div className="mt-2 flex items-center gap-2 text-sm">
-                        <span className="text-muted-foreground line-through">{formatNumber(p.originalPrice, locale)}</span>
+                        <span className="relative text-muted-foreground">
+                          {formatNumber(p.originalPrice, locale)}
+                          <motion.span
+                            className="absolute inset-x-[-2px] top-1/2 h-[1.5px] origin-left bg-primary rtl:origin-right"
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.4 + (i % 3) * 0.1, ease: EASE_OUT }}
+                            aria-hidden
+                          />
+                        </span>
                         <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
                           {L(`خصم ${discount}%`, `Save ${discount}%`)}
                         </span>
@@ -398,37 +423,6 @@ function SectionHead({ eyebrow, title, subtitle }: { eyebrow: string; title: str
       <p className="text-eyebrow">{eyebrow}</p>
       <h2 className="text-headline mt-3">{title}</h2>
       {subtitle && <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>}
-    </Reveal>
-  );
-}
-
-/** Horizontally scrolling, snap-aligned photo strip that bleeds to the screen edges. */
-function PhotoRail({ images, alt, hint }: { images: string[]; alt: string; hint: string }) {
-  return (
-    <Reveal>
-      <div
-        className="scrollbar-none flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scroll-padding-inline:1rem] md:px-[max(1rem,calc((100vw-1400px)/2+1rem))]"
-        role="list"
-        aria-label={alt}
-        tabIndex={0}
-      >
-        {images.map((src, i) => (
-          <div
-            key={src}
-            role="listitem"
-            className="relative aspect-[3/4] w-[62vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border/60 bg-muted sm:w-[240px]"
-          >
-            <Image
-              src={src}
-              alt={`${alt} ${i + 1}`}
-              fill
-              sizes="(min-width: 640px) 280px, 62vw"
-              className="object-cover"
-            />
-          </div>
-        ))}
-      </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground md:hidden">{hint}</p>
     </Reveal>
   );
 }
