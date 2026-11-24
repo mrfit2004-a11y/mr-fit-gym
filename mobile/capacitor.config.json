@@ -3,7 +3,7 @@
   "appName": "MR FIT",
   "webDir": "www",
   "server": {
-    "url": "https://ahmed-emad-one.vercel.app/login",
+    "url": "https://mr-fit-gym-psi.vercel.app/login",
     "androidScheme": "https",
     "errorPath": "offline.html"
   },
