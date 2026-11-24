@@ -305,8 +305,8 @@ const range = (n: number, start = 1) => Array.from({ length: n }, (_, i) => i + 
 export const GALLERY = {
   /** Studio / gym shots of the trainer (portrait 599×900, except coach-5 landscape). */
   coach: range(4, 2).map((i) => `/brand/coach/coach-${i}.webp`),
-  /** Client physique results (450×600). */
-  transformations: range(9).map((i) => `/brand/transformations/t-${i}.webp`),
+  /** Client physique results (600×800). */
+  transformations: range(5).map((i) => `/brand/transformations/t-${i}.webp`),
   /** Swimmers the trainer coached, with their medals (~450×560). */
   swimmers: range(11).map((i) => `/brand/swimmers/sw-${i}.webp`),
 };
