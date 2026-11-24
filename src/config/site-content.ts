@@ -157,22 +157,6 @@ export const PACKAGES: SitePackage[] = [
   },
 ];
 
-/** Announced on the current site as "coming soon", with no prices yet. */
-export const SWIMMERS_BUNDLE: { comingSoon: boolean; title: L; desc: L; features: L[] } = {
-  comingSoon: true,
-  title: { ar: "باقة السبّاحين", en: "Swimmers Bundle" },
-  desc: {
-    ar: "جيم وسباحة في اشتراك واحد. برنامج لياقة من الكابتن، وبرنامج سباحة احترافي من مدرب السباحة — والاتنين بيتابعوك في نفس التطبيق.",
-    en: "Gym and swimming in one subscription. A fitness program from the coach and a competitive swim program from a swimming coach — both coaching you inside one app.",
-  },
-  features: [
-    { ar: "برنامج جيم من الكابتن", en: "Gym program from the coach" },
-    { ar: "برنامج سباحة من مدرب السباحة", en: "Swim program from a swimming coach" },
-    { ar: "نظام غذائي مخصّص للسبّاحين", en: "Swimmer-specific nutrition plan" },
-    { ar: "متابعة من المدربَين في تطبيق واحد", en: "Both coaches follow you in one app" },
-  ],
-};
-
 export const TESTIMONIALS: { name: L; quote: L }[] = [
   {
     name: { ar: "سلفيا", en: "Silvia" },
@@ -303,10 +287,6 @@ export const CONTACT = {
 const range = (n: number, start = 1) => Array.from({ length: n }, (_, i) => i + start);
 
 export const GALLERY = {
-  /** Studio / gym shots of the trainer (portrait 599×900, except coach-5 landscape). */
-  coach: range(4, 2).map((i) => `/brand/coach/coach-${i}.webp`),
   /** Client physique results (600×800). */
   transformations: range(5).map((i) => `/brand/transformations/t-${i}.webp`),
-  /** Swimmers the trainer coached, with their medals (~450×560). */
-  swimmers: range(11).map((i) => `/brand/swimmers/sw-${i}.webp`),
 };

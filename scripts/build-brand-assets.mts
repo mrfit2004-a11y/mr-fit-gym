@@ -1,6 +1,6 @@
 /**
  * Builds every brand image from the two source files in the project root:
- *   - ahmedlogo.png  → trainer portrait (hero banner, login panel, share image)
+ *   - mrfit-logo.jpg → trainer portrait (hero banner, login panel, share image)
  *   - mrfit-logo.jpg → round logo badge (app icons, favicon, header logo)
  *
  * Re-run after replacing either source:
@@ -12,7 +12,7 @@ import { mkdir, stat } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 
 const root = process.cwd();
-const photoSrc = resolve(root, "ahmedlogo.png");
+const photoSrc = resolve(root, "mrfit-logo.jpg");
 const logoSrc = resolve(root, "mrfit-logo.jpg");
 const brandDir = resolve(root, "public/brand");
 await mkdir(brandDir, { recursive: true });
@@ -31,12 +31,12 @@ const meta = await sharp(photoSrc).metadata();
 console.log(`portrait source: ${meta.width}x${meta.height}`);
 
 // Full portrait (hero banner / login panel). next/image resizes per viewport.
-const portrait = resolve(brandDir, "ahmed-emad.webp");
+const portrait = resolve(brandDir, "mr-fit.webp");
 await sharp(photoSrc).resize(1200, 1200, { fit: "cover" }).webp({ quality: 82 }).toFile(portrait);
 await report(portrait);
 
 // Head-and-shoulders crop for avatars / small circles.
-const avatar = resolve(brandDir, "ahmed-emad-avatar.webp");
+const avatar = resolve(brandDir, "mr-fit-avatar.webp");
 const w = meta.width!;
 const side = Math.round(w * 0.52);
 await sharp(photoSrc)

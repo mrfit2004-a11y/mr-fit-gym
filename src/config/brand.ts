@@ -24,9 +24,9 @@ export const BRAND = {
     /** Round logo badge with transparent corners. */
     logo: "/brand/logo.webp",
     /** Square trainer portrait (1200×1200). */
-    portrait: "/brand/ahmed-emad.webp",
+    portrait: "/brand/mr-fit.webp",
     /** Head-and-shoulders crop for small circles. */
-    avatar: "/brand/ahmed-emad-avatar.webp",
+    avatar: "/brand/mr-fit-avatar.webp",
     /** 1200×630 share image. */
     og: "/brand/og.jpg",
     /** Square icon on black — push notifications. */

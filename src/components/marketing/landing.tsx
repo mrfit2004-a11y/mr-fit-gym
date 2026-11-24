@@ -14,7 +14,6 @@ import {
   Quote,
   Salad,
   Star,
-  Waves,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -29,7 +28,6 @@ import {
   PILLARS,
   SERVICES,
   STATS,
-  SWIMMERS_BUNDLE,
   TESTIMONIALS,
 } from "@/config/site-content";
 import { cn, formatNumber } from "@/lib/utils";
@@ -104,7 +102,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
               className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_40%,hsl(var(--primary)/0.35),transparent_70%)] blur-2xl"
               aria-hidden
             />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-border/60 bg-card shadow-elevated">
+            <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-border/60 bg-black shadow-elevated">
               <Image
                 src={BRAND.images.portrait}
                 alt={coachName}
@@ -171,25 +169,16 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
       {/* ───────── About the coach ───────── */}
       <section id="about" className="scroll-mt-20 bg-card/50 py-20 md:py-28">
         <div className="container grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal className="grid grid-cols-2 gap-3 sm:gap-4">
-            {GALLERY.coach.slice(0, 3).map((src, i) => (
-              <div
-                key={src}
-                className={cn(
-                  "relative overflow-hidden rounded-3xl border border-border/60 bg-muted",
-                  // Stacked tiles stretch to fill half the tall tile, so they stay close to square.
-                  i === 0 ? "row-span-2 aspect-[3/5]" : "min-h-0",
-                )}
-              >
-                <Image
-                  src={src}
-                  alt={coachName}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 46vw"
-                  className={cn("object-cover", i === 0 ? "object-top" : "object-center")}
-                />
-              </div>
-            ))}
+          <Reveal className="mx-auto w-full max-w-md">
+            <div className="relative aspect-square overflow-hidden rounded-full bg-black shadow-elevated">
+              <Image
+                src={BRAND.images.portrait}
+                alt={coachName}
+                fill
+                sizes="(min-width: 1024px) 28rem, 92vw"
+                className="object-cover"
+              />
+            </div>
           </Reveal>
 
           <div>
@@ -233,15 +222,6 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
           />
         </div>
         <PhotoRail images={GALLERY.transformations} alt={L("نتيجة عميل", "Client result")} hint={L("اسحب لمشاهدة المزيد", "Swipe to see more")} />
-
-        <div className="container mt-20 md:mt-28">
-          <SectionHead
-            eyebrow={L("بطولات وميداليات", "Medals & titles")}
-            title={L("سبّاحون على منصّات التتويج", "Swimmers on the podium")}
-            subtitle={L("لاعبون درّبهم الكابتن وحقّقوا ميداليات في بطولات السباحة.", "Athletes coached to medals in swimming championships.")}
-          />
-        </div>
-        <PhotoRail images={GALLERY.swimmers} alt={L("سبّاح مع ميدالياته", "Swimmer with medals")} hint={L("اسحب لمشاهدة المزيد", "Swipe to see more")} />
       </section>
 
       {/* ───────── Pricing ───────── */}
@@ -302,24 +282,6 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
             })}
           </div>
 
-          {SWIMMERS_BUNDLE.comingSoon && (
-            <Reveal className="mx-auto mt-8 max-w-6xl">
-              <div className="flex flex-col gap-5 rounded-3xl border border-dashed border-border bg-background p-7 md:flex-row md:items-center">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <Waves className="h-6 w-6" />
-                </span>
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-lg font-semibold">{tr(SWIMMERS_BUNDLE.title)}</h3>
-                    <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
-                      {L("قريبًا", "Coming soon")}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tr(SWIMMERS_BUNDLE.desc)}</p>
-                </div>
-              </div>
-            </Reveal>
-          )}
         </div>
       </section>
 
