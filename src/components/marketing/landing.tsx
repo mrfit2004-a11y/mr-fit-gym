@@ -102,7 +102,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
               className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_40%,hsl(var(--primary)/0.35),transparent_70%)] blur-2xl"
               aria-hidden
             />
-            <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-border/60 bg-black shadow-elevated">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-border/60 bg-card shadow-elevated">
               <Image
                 src={BRAND.images.portrait}
                 alt={coachName}
@@ -172,7 +172,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
           <Reveal className="mx-auto w-full max-w-md">
             <div className="relative aspect-square overflow-hidden rounded-full bg-black shadow-elevated">
               <Image
-                src={BRAND.images.portrait}
+                src={BRAND.images.logoLarge}
                 alt={coachName}
                 fill
                 sizes="(min-width: 1024px) 28rem, 92vw"
@@ -286,6 +286,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
       </section>
 
       {/* ───────── Testimonials ───────── */}
+      {TESTIMONIALS.length > 0 && (
       <section id="testimonials" className="scroll-mt-20 py-20 md:py-28">
         <div className="container">
           <SectionHead eyebrow={L("آراء العملاء", "Testimonials")} title={L("الناس بتقول إيه", "What people say")} />
@@ -314,6 +315,7 @@ export function Landing({ packages }: { packages: PackageDTO[] }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* ───────── FAQ ───────── */}
       <section id="faq" className="scroll-mt-20 bg-card/50 py-20 md:py-28">

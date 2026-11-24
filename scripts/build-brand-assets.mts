@@ -1,6 +1,6 @@
 /**
  * Builds every brand image from the two source files in the project root:
- *   - mrfit-logo.jpg → trainer portrait (hero banner, login panel, share image)
+ *   - mrfit-coach.jpg → trainer portrait (hero banner, login panel, share image)
  *   - mrfit-logo.jpg → round logo badge (app icons, favicon, header logo)
  *
  * Re-run after replacing either source:
@@ -12,7 +12,7 @@ import { mkdir, stat } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 
 const root = process.cwd();
-const photoSrc = resolve(root, "mrfit-logo.jpg");
+const photoSrc = resolve(root, "mrfit-coach.jpg");
 const logoSrc = resolve(root, "mrfit-logo.jpg");
 const brandDir = resolve(root, "public/brand");
 await mkdir(brandDir, { recursive: true });

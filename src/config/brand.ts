@@ -23,6 +23,8 @@ export const BRAND = {
   images: {
     /** Round logo badge with transparent corners. */
     logo: "/brand/logo.webp",
+    /** Full-size logo badge (1200×1200) for large placements. */
+    logoLarge: "/brand/mr-fit-logo.webp",
     /** Square trainer portrait (1200×1200). */
     portrait: "/brand/mr-fit.webp",
     /** Head-and-shoulders crop for small circles. */
