@@ -199,10 +199,10 @@ export function ExerciseLibrary({
         <EmptyState icon={Dumbbell} title={t.common.noResults} description={t.common.emptyDescription} />
       ) : (
         <>
-          <div className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${isPending ? "opacity-60" : ""}`}>
+          <div className={`grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5 ${isPending ? "opacity-60" : ""}`}>
             {items.map((e) => (
               <Card key={e._id} className="overflow-hidden transition-shadow hover:shadow-md">
-                <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-muted">
+                <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-muted">
                   <button
                     type="button"
                     onClick={() => setViewing(e)}
@@ -216,12 +216,12 @@ export function ExerciseLibrary({
                     />
                   </button>
                   {(e.videoUrl || e.youtubeUrl || e.imageUrlStart || e.gifUrl) && (
-                    <Badge variant="secondary" className="pointer-events-none absolute end-2 top-2 gap-1">
-                      <Film className="h-3 w-3" />
+                    <Badge variant="secondary" className="pointer-events-none absolute end-1.5 top-1.5 gap-1 px-1.5 py-0 text-[10px]">
+                      <Film className="h-2.5 w-2.5" />
                       {e.videoUrl ? (locale === "ar" ? "فيديو" : "Video") : e.youtubeUrl ? "YouTube" : "GIF"}
                     </Badge>
                   )}
-                  {!e.isSystemExercise && <Badge className="pointer-events-none absolute start-2 top-2">{locale === "ar" ? "مخصص" : "Custom"}</Badge>}
+                  {!e.isSystemExercise && <Badge className="pointer-events-none absolute start-1.5 top-1.5 px-1.5 py-0 text-[10px]">{locale === "ar" ? "مخصص" : "Custom"}</Badge>}
                   {canMutate(e) && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -234,14 +234,14 @@ export function ExerciseLibrary({
                     </DropdownMenu>
                   )}
                 </div>
-                <CardContent className="space-y-1.5 p-4">
-                  <h3 className="font-semibold leading-tight">{locale === "ar" ? e.nameAr : e.nameEn}</h3>
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <Badge variant="outline">{label(EXERCISE_CATEGORY_LABELS, e.category, locale)}</Badge>
-                    {e.youtubeUrl && <Youtube className="h-4 w-4 text-destructive" />}
+                <CardContent className="space-y-1 p-2.5 sm:space-y-1.5 sm:p-3">
+                  <h3 className="line-clamp-2 text-sm font-semibold leading-snug">{locale === "ar" ? e.nameAr : e.nameEn}</h3>
+                  <div className="flex flex-wrap items-center gap-1">
+                    <Badge variant="outline" className="px-1.5 py-0 text-[10px] sm:text-xs">{label(EXERCISE_CATEGORY_LABELS, e.category, locale)}</Badge>
+                    {e.youtubeUrl && <Youtube className="h-3.5 w-3.5 text-destructive" />}
                   </div>
                   {e.targetMuscles && e.targetMuscles.length > 0 && (
-                    <p className="text-xs text-muted-foreground">{e.targetMuscles.join("، ")}</p>
+                    <p className="hidden truncate text-xs text-muted-foreground sm:block">{e.targetMuscles.join("، ")}</p>
                   )}
                 </CardContent>
               </Card>
