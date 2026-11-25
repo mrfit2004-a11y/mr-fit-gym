@@ -51,3 +51,5 @@ yarn-error.log*
 # Built Android packages
 *.apk
 *.aab
+
+!public/mr-fit.apk

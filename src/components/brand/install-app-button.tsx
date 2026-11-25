@@ -21,6 +21,7 @@ export function InstallAppButton() {
   const ar = locale === "ar";
   const [deferred, setDeferred] = useState<InstallPromptEvent | null>(null);
   const [isIos, setIsIos] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
   const [hidden, setHidden] = useState(true);
   const [showGuide, setShowGuide] = useState(false);
 
@@ -35,6 +36,7 @@ export function InstallAppButton() {
     const ios =
       /iPad|iPhone|iPod/.test(ua) || (ua.includes("Macintosh") && navigator.maxTouchPoints > 1);
     setIsIos(ios);
+    setIsAndroid(/Android/i.test(ua));
     setHidden(false); // always offer it in the browser
 
     const onPrompt = (e: Event) => {
@@ -57,7 +59,11 @@ export function InstallAppButton() {
   if (hidden) return null;
 
   const install = async () => {
-    if (deferred) {
+    if (isAndroid) {
+      // Real native app (no Chrome badge): download the signed APK.
+      window.location.href = "/mr-fit.apk";
+      setShowGuide(true);
+    } else if (deferred) {
       await deferred.prompt();
       const { outcome } = await deferred.userChoice;
       if (outcome === "accepted") setHidden(true);
@@ -89,7 +95,7 @@ export function InstallAppButton() {
           >
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-base font-bold">
-                {isIos ? (ar ? "تثبيت التطبيق على الآيفون" : "Install on iPhone") : (ar ? "تثبيت التطبيق" : "Install the app")}
+                {isIos ? (ar ? "تثبيت التطبيق على الآيفون" : "Install on iPhone") : (ar ? "جاري تحميل التطبيق" : "Downloading the app")}
               </h3>
               <button type="button" onClick={() => setShowGuide(false)} aria-label="close">
                 <X className="h-5 w-5" />
@@ -99,7 +105,7 @@ export function InstallAppButton() {
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">1</span>
                 <span className="flex flex-wrap items-center gap-1">
-                  {isIos ? (ar ? "دوس على زر المشاركة" : "Tap the Share button") : (ar ? "دوس على قايمة ⋮ فوق في كروم" : "Tap the ⋮ menu in Chrome")}
+                  {isIos ? (ar ? "دوس على زر المشاركة" : "Tap the Share button") : (ar ? "استنى لحد ما ملف mr-fit.apk يخلص تحميل، ودوس عليه" : "Wait for mr-fit.apk to finish downloading, then tap it")}
                   {isIos && <Share className="h-4 w-4 text-primary" />}
                   {isIos && (ar ? "في Safari" : "in Safari")}
                 </span>
@@ -107,17 +113,17 @@ export function InstallAppButton() {
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">2</span>
                 <span className="flex flex-wrap items-center gap-1">
-                  {isIos ? (ar ? "اختار «إضافة إلى الشاشة الرئيسية»" : "Choose “Add to Home Screen”") : (ar ? "اختار «تثبيت التطبيق»" : "Choose “Install app”")}
+                  {isIos ? (ar ? "اختار «إضافة إلى الشاشة الرئيسية»" : "Choose “Add to Home Screen”") : (ar ? "لو طلب إذن، اختار «السماح من هذا المصدر» وارجع" : "If asked, allow installs from this source and go back")}
                   <SquarePlus className="h-4 w-4 text-primary" />
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">3</span>
-                <span>{ar ? "دوس «إضافة» أو «تثبيت»، والتطبيق هيظهر مع باقي تطبيقاتك" : "Tap “Add”, and the app appears with your other apps"}</span>
+                <span>{ar ? "دوس «تثبيت»، والتطبيق هيظهر مع باقي تطبيقاتك" : "Tap “Add”, and the app appears with your other apps"}</span>
               </li>
             </ol>
             <p className="mt-4 text-xs text-muted-foreground">
-              {isIos ? (ar ? "لازم تفتح الموقع من Safari." : "The site must be opened in Safari.") : (ar ? "لو مش لاقي «تثبيت التطبيق»، قفل كروم وافتحه تاني بعد دقيقة." : "If “Install app” is missing, reopen Chrome after a minute.")}
+              {isIos ? (ar ? "لازم تفتح الموقع من Safari." : "The site must be opened in Safari.") : (ar ? "التحميل ما بدأش؟ " : "Download didn’t start? ")}{!isIos && <a href="/mr-fit.apk" download className="font-semibold text-primary underline">{ar ? "دوس هنا" : "Tap here"}</a>}
             </p>
           </div>
         </div>
