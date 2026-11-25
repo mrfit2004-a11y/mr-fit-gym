@@ -35,7 +35,7 @@ export function InstallAppButton() {
     const ios =
       /iPad|iPhone|iPod/.test(ua) || (ua.includes("Macintosh") && navigator.maxTouchPoints > 1);
     setIsIos(ios);
-    if (ios) setHidden(false);
+    setHidden(false); // always offer it in the browser
 
     const onPrompt = (e: Event) => {
       e.preventDefault();
@@ -62,7 +62,7 @@ export function InstallAppButton() {
       const { outcome } = await deferred.userChoice;
       if (outcome === "accepted") setHidden(true);
       setDeferred(null);
-    } else if (isIos) {
+    } else {
       setShowGuide(true);
     }
   };
@@ -89,7 +89,7 @@ export function InstallAppButton() {
           >
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-base font-bold">
-                {ar ? "تثبيت التطبيق على الآيفون" : "Install on iPhone"}
+                {isIos ? (ar ? "تثبيت التطبيق على الآيفون" : "Install on iPhone") : (ar ? "تثبيت التطبيق" : "Install the app")}
               </h3>
               <button type="button" onClick={() => setShowGuide(false)} aria-label="close">
                 <X className="h-5 w-5" />
@@ -99,25 +99,25 @@ export function InstallAppButton() {
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">1</span>
                 <span className="flex flex-wrap items-center gap-1">
-                  {ar ? "دوس على زر المشاركة" : "Tap the Share button"}
-                  <Share className="h-4 w-4 text-primary" />
-                  {ar ? "في Safari" : "in Safari"}
+                  {isIos ? (ar ? "دوس على زر المشاركة" : "Tap the Share button") : (ar ? "دوس على قايمة ⋮ فوق في كروم" : "Tap the ⋮ menu in Chrome")}
+                  {isIos && <Share className="h-4 w-4 text-primary" />}
+                  {isIos && (ar ? "في Safari" : "in Safari")}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">2</span>
                 <span className="flex flex-wrap items-center gap-1">
-                  {ar ? "اختار «إضافة إلى الشاشة الرئيسية»" : "Choose “Add to Home Screen”"}
+                  {isIos ? (ar ? "اختار «إضافة إلى الشاشة الرئيسية»" : "Choose “Add to Home Screen”") : (ar ? "اختار «تثبيت التطبيق»" : "Choose “Install app”")}
                   <SquarePlus className="h-4 w-4 text-primary" />
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-bold text-primary">3</span>
-                <span>{ar ? "دوس «إضافة»، والتطبيق هيظهر مع باقي تطبيقاتك" : "Tap “Add”, and the app appears with your other apps"}</span>
+                <span>{ar ? "دوس «إضافة» أو «تثبيت»، والتطبيق هيظهر مع باقي تطبيقاتك" : "Tap “Add”, and the app appears with your other apps"}</span>
               </li>
             </ol>
             <p className="mt-4 text-xs text-muted-foreground">
-              {ar ? "لازم تفتح الموقع من Safari." : "The site must be opened in Safari."}
+              {isIos ? (ar ? "لازم تفتح الموقع من Safari." : "The site must be opened in Safari.") : (ar ? "لو مش لاقي «تثبيت التطبيق»، قفل كروم وافتحه تاني بعد دقيقة." : "If “Install app” is missing, reopen Chrome after a minute.")}
             </p>
           </div>
         </div>
