@@ -47,3 +47,7 @@ yarn-error.log*
 *_dry.txt
 
 .vercel
+
+# Built Android packages
+*.apk
+*.aab
