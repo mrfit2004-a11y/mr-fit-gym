@@ -32,7 +32,14 @@ const ROOT_SCREENS = ["/login", "/coach", "/client", "/admin", "/change-password
 export function NativeAppBridge() {
   useEffect(() => {
     const cap = (window as unknown as { Capacitor?: CapacitorBridge }).Capacitor;
-    if (!cap?.isNativePlatform?.()) return;
+    if (!cap?.isNativePlatform?.()) {
+      // Browser: register the service worker on every page so Chrome can
+      // install the site as a real app (WebAPK) without the Chrome badge.
+      if ("serviceWorker" in navigator) {
+        void navigator.serviceWorker.register("/sw.js").catch(() => {});
+      }
+      return;
+    }
     document.documentElement.classList.add("native-app");
 
     // Status bar follows the light/dark theme of the page.
