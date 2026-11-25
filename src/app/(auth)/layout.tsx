@@ -5,6 +5,7 @@ import { ThemeToggle } from "@/components/brand/theme-toggle";
 import { auth } from "@/lib/auth";
 import { homePathForRole } from "@/lib/permissions";
 import { AuthHero } from "./auth-hero";
+import { InstallAppButton } from "@/components/brand/install-app-button";
 
 export default async function AuthLayout({
   children,
@@ -34,7 +35,10 @@ export default async function AuthLayout({
         </header>
 
         <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-8 lg:py-12">
-          {children}
+          <div className="flex w-full flex-col items-center gap-4 [&>*]:w-full">
+            {children}
+            <InstallAppButton />
+          </div>
         </main>
       </div>
     </div>

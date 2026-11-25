@@ -60,6 +60,7 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   manifest: "/site.webmanifest",
+  appleWebApp: { capable: true, title: "MR FIT", statusBarStyle: "black-translucent" },
 };
 
 export const viewport: Viewport = {
