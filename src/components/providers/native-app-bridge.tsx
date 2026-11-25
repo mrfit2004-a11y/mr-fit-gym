@@ -19,8 +19,15 @@ type CapacitorBridge = {
       ) => Promise<ListenerHandle> | ListenerHandle;
       minimizeApp: () => Promise<void>;
     };
+    StatusBar?: {
+      setStyle: (o: { style: "DARK" | "LIGHT" }) => Promise<void>;
+      setBackgroundColor: (o: { color: string }) => Promise<void>;
+    };
   };
 };
+
+/** Screens where "back" should leave the app rather than step back (e.g. to login). */
+const ROOT_SCREENS = ["/login", "/coach", "/client", "/admin", "/change-password"];
 
 export function NativeAppBridge() {
   useEffect(() => {
@@ -28,18 +35,37 @@ export function NativeAppBridge() {
     if (!cap?.isNativePlatform?.()) return;
     document.documentElement.classList.add("native-app");
 
+    // Status bar follows the light/dark theme of the page.
+    const bar = cap.Plugins?.StatusBar;
+    const syncStatusBar = () => {
+      if (!bar) return;
+      const dark = document.documentElement.classList.contains("dark");
+      void bar.setStyle({ style: dark ? "DARK" : "LIGHT" }).catch(() => {});
+      void bar.setBackgroundColor({ color: dark ? "#000000" : "#F7F7F9" }).catch(() => {});
+    };
+    syncStatusBar();
+    const themeObserver = new MutationObserver(syncStatusBar);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
     const app = cap.Plugins?.App;
-    if (!app) return;
     let handle: ListenerHandle | undefined;
-    // Android back button: go back in history, or send the app to the background
-    // from a top-level screen instead of closing it.
-    Promise.resolve(
-      app.addListener("backButton", ({ canGoBack }) => {
-        if (canGoBack && window.history.length > 1) window.history.back();
-        else void app.minimizeApp();
-      }),
-    ).then((h) => (handle = h));
-    return () => handle?.remove();
+    if (app) {
+      // Android back button: step back inside the app, but from a top-level
+      // screen send the app to the background instead of returning to login.
+      Promise.resolve(
+        app.addListener("backButton", ({ canGoBack }) => {
+          const path = window.location.pathname.replace(/\/$/, "") || "/";
+          const atRoot = ROOT_SCREENS.includes(path);
+          if (!atRoot && canGoBack && window.history.length > 1) window.history.back();
+          else void app.minimizeApp();
+        }),
+      ).then((h) => (handle = h));
+    }
+
+    return () => {
+      themeObserver.disconnect();
+      handle?.remove();
+    };
   }, []);
 
   return null;

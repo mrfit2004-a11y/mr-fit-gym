@@ -18,6 +18,23 @@ const PROTECTED_PREFIXES = ["/admin", "/coach", "/client"];
 const APP_USER_AGENT = "MrFitApp/";
 
 /**
+ * Hostnames that behave like the app: no marketing site, straight to login
+ * (or the dashboard when signed in). Comma-separated, e.g. "app.fitxnet.com".
+ */
+const APP_HOSTS = (process.env.APP_HOSTS ?? "")
+  .split(",")
+  .map((h) => h.trim().toLowerCase())
+  .filter(Boolean);
+
+function isAppRequest(request: Request): boolean {
+  if ((request.headers.get("user-agent") ?? "").includes(APP_USER_AGENT)) return true;
+  const host = (request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "")
+    .split(":")[0]
+    .toLowerCase();
+  return APP_HOSTS.includes(host);
+}
+
+/**
  * Edge-safe auth config. Contains NO database or Node-only code so it can run
  * inside middleware. The real Credentials provider (which touches MongoDB) is
  * added in `src/lib/auth/index.ts`, which runs in the Node.js runtime.
@@ -40,9 +57,9 @@ export const authConfig = {
         (p) => pathname === p || pathname.startsWith(`${p}/`),
       );
 
-      // Android app: no marketing pages. Anything outside the dashboards
-      // (/, /register, ...) goes to the user's home, or to /login when signed out.
-      const inApp = (request.headers.get("user-agent") ?? "").includes(APP_USER_AGENT);
+      // Android app or app subdomain: no marketing pages. Anything outside the
+      // dashboards (/, /register, ...) goes to the user's home, or to /login when signed out.
+      const inApp = isAppRequest(request);
       const isAsset = /\.[a-z0-9]+$/i.test(pathname); // images, sw.js, manifest, ...
       if (inApp && !isProtected && !isAsset && !pathname.startsWith("/api/")) {
         const target = user ? homePathForRole(user.role) : "/login";
