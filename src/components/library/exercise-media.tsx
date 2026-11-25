@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dumbbell } from "lucide-react";
 import { youtubeVideoId, youtubeMaxResThumbnail, youtubeHqThumbnail } from "@/lib/youtube";
-import { cloudinaryThumb, cloudinaryVideoPoster } from "@/lib/cloudinary-url";
+import { cloudinaryThumb } from "@/lib/cloudinary-url";
 
 export interface ExerciseMediaSource {
   videoUrl?: string;
@@ -135,21 +135,8 @@ export function ExerciseMedia({
 
   // Lists: a still frame instead of an autoplaying video per card — a grid of
   // 24 cards would otherwise download and play 24 videos at once.
-  if (media.videoUrl && thumb) {
-    const poster = cloudinaryVideoPoster(media.videoUrl);
-    return (
-      <div className={className}>
-        <div className="relative flex h-full w-full items-center justify-center bg-black">
-          {poster ? (
-            <Image src={poster} alt={alt} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" unoptimized />
-          ) : (
-            <video src={media.videoUrl} className="h-full w-full object-contain" preload="metadata" muted playsInline />
-          )}
-        </div>
-      </div>
-    );
-  }
-
+  // Videos autoplay (muted, looped) everywhere — including library cards —
+  // without a tap. Download / PiP / context menu are blocked.
   if (media.videoUrl) {
     return (
       <div className={className}>
@@ -161,7 +148,12 @@ export function ExerciseMedia({
             loop
             muted
             playsInline
+            preload="auto"
             controls={false}
+            controlsList="nodownload noplaybackrate"
+            disablePictureInPicture
+            draggable={false}
+            onContextMenu={(e) => e.preventDefault()}
           />
         </div>
       </div>

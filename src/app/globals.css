@@ -135,6 +135,15 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Block saving media: no long-press "save image", no drag-out. */
+  img,
+  video {
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
   /* Language-aware typography: Arabic font for RTL, sans for LTR */
   html[dir="rtl"] body {
     @apply font-arabic;
