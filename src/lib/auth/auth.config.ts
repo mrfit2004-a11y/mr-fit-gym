@@ -19,9 +19,9 @@ const APP_USER_AGENT = "MrFitApp/";
 
 /**
  * Hostnames that behave like the app: no marketing site, straight to login
- * (or the dashboard when signed in). Comma-separated, e.g. "app.fitxnet.com".
+ * (or the dashboard when signed in). Comma-separated; APP_HOSTS overrides the default.
  */
-const APP_HOSTS = (process.env.APP_HOSTS ?? "")
+const APP_HOSTS = (process.env.APP_HOSTS || "appmr.fitxnet.com")
   .split(",")
   .map((h) => h.trim().toLowerCase())
   .filter(Boolean);
